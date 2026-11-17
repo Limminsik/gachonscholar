@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gachon Scholar — Systematic literature review platform</title>
+<meta name="description" content="Multi-agent platform that runs a PRISMA 2020 systematic literature review from search to final report.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafaf8;--ink:#14161c;--mut:#5b6070;--line:#dcdcd6;--card:#fff;--accent:#1f4ea8;--soft:#eef2fa}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--ink:#eceef3;--mut:#a0a6b6;--line:#2a2f3b;--card:#161a22;--accent:#8fb2ff;--soft:#1a2233}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+header{padding:64px 0 28px}
+.eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+h1{font:500 clamp(34px,5vw,52px)/1.1 "Source Serif 4",serif;margin:10px 0 14px;letter-spacing:-.01em}
+h1 em{color:var(--accent)}
+.lede{font-size:clamp(16px,1.6vw,18px);color:var(--mut);max-width:62ch;margin:0 0 22px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:8px;color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px;background:var(--card)}
+.btn.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+figure{margin:20px 0 0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+figcaption{font-size:13px;color:var(--mut);margin-top:8px}
+section{padding:44px 0 0}
+h2{font:500 26px/1.2 "Source Serif 4",serif;margin:0 0 16px;padding-top:14px;border-top:2px solid var(--ink)}
+ol.pipe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:s}
+ol.pipe li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+ol.pipe li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--accent);font-size:12.5px;font-weight:600;margin-bottom:8px}
+ol.pipe b{display:block;font:500 17px/1.25 "Source Serif 4",serif;margin-bottom:4px}
+ol.pipe span{font-size:13.5px;color:var(--mut);line-height:1.5;display:block}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.grid b{display:block;font-weight:600;font-size:15px;margin-bottom:2px}
+.grid span{font-size:13.5px;color:var(--mut);line-height:1.5;display:block}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0}
+p.n{color:var(--mut);font-size:14.5px;margin:12px 0 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td{padding:9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{color:var(--mut);width:34%;padding-right:16px}
+footer{padding:44px 0 56px;color:var(--mut);font-size:13.5px}
+footer a{color:inherit}
+@media (max-width:760px){header{padding-top:40px}ol.pipe{grid-template-columns:1fr}.grid{grid-template-columns:1fr}td:first-child{width:40%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eb">Research software · Gachon University</div>
+  <h1>Gachon <em>Scholar</em></h1>
+  <p class="lede">A multi-agent platform for systematic literature review. Enter a research topic, and it runs the PRISMA 2020 pipeline — from search to a written review report — without manual steps in between.</p>
+  <div class="btns">
+    <a class="btn p" href="https://github.com/Limminsik/gachonscholar">GitHub ↗</a>
+    <a class="btn" href="#run">Run locally</a>
+    <a class="btn" href="https://limminsik.github.io/">Minsik Lim ↗</a>
+  </div>
+  <figure><img src="assets/main.png" alt="Gachon Scholar search screen" width="1440" height="900"><figcaption>Search screen — a research topic is the only input.</figcaption></figure>
+</header>
+
+<section>
+  <h2>Pipeline</h2>
+  <ol class="pipe">
+    <li><b>Identification</b><span>Research question → PICO → MeSH terms → Boolean query. PubMed, Semantic Scholar and Google Scholar searched in parallel, duplicates removed.</span></li>
+    <li><b>Screening</b><span>Title and abstract screening against inclusion and exclusion criteria.</span></li>
+    <li><b>Full text</b><span>Open-access PDF, arXiv, PMC, Unpaywall, then the institutional library. Manual PDF upload is also supported.</span></li>
+    <li><b>Eligibility</b><span>Full-text PICO analysis and eligibility assessment, with reasons, key findings and limitations.</span></li>
+    <li><b>Report</b><span>Literature review report — summary, research trends, implications, limitations, references — saved as PDF.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Features</h2>
+  <div class="grid">
+    <div><b>End-to-end automation</b><span>Runs from search to report after a single start.</span></div>
+    <div><b>Five-step search terms</b><span>Domain analysis, concept expansion, PICO, MeSH, Boolean query.</span></div>
+    <div><b>PRISMA flow diagram</b><span>Counts for identification, screening, eligibility and inclusion, tracked live.</span></div>
+    <div><b>Live streaming</b><span>Per-paper decisions appear on screen as they are made.</span></div>
+    <div><b>Session persistence</b><span>Every stage is stored, so a session is restored on return.</span></div>
+    <div><b>Thematic synthesis</b><span>The report integrates findings by theme rather than listing papers.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Stack</h2>
+  <table>
+    <tr><td>Frontend</td><td>Next.js 14, TypeScript, Tailwind CSS</td></tr>
+    <tr><td>Backend</td><td>NestJS 10, Prisma ORM, PostgreSQL 16</td></tr>
+    <tr><td>Agent pipeline</td><td>FastAPI, LangGraph StateGraph</td></tr>
+    <tr><td>Full-text retrieval</td><td>Playwright, pypdf, httpx</td></tr>
+    <tr><td>Search sources</td><td>PubMed E-utilities, Semantic Scholar API, SerpAPI (Google Scholar)</td></tr>
+    <tr><td>Infrastructure</td><td>Docker Compose, Server-Sent Events</td></tr>
+  </table>
+</section>
+
+<section id="run">
+  <h2>Run locally</h2>
+<pre>git clone https://github.com/Limminsik/gachonscholar.git
+cd gachonscholar
+
+cp .env.example ai-service/.env              # add your API keys
+docker compose up --build                    # → http://localhost:3000</pre>
+  <p class="n">The platform runs on your own machine with your own API keys, so there is no hosted demo. Details are in the repository README.</p>
+</section>
+
+<footer>Gachon University · Department of Computer Engineering · <a href="https://github.com/Limminsik/gachonscholar">github.com/Limminsik/gachonscholar</a></footer>
+</div>
+</body>
+</html>
